@@ -1,12 +1,6 @@
-import discord
-from discord.ext import commands
-
-
-intents = discord.Intents.all()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+from bot_handlers.bot_init import bot
 
 
 @bot.event
 async def on_ready():
-    print('Bot is ready.')
+    print('Бот запущен')

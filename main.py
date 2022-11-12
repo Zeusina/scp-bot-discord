@@ -1,30 +1,19 @@
 # -*- coding: utf-8 -*-
-
+from config import token
+import asyncio
+from bot_handlers.bot_init import bot
+from bot_handlers import music, bot_events
 import discord
 from discord.ext import commands
-from config import token
-from bot_handlers import bot_commands, bot_events
 
 
 import youtube_dl
 import os
 
 
-intents = discord.Intents.all()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+async def main():
+    async with bot:
+        await bot.add_cog(music.Music(bot))
+        await bot.start(token)
 
-# adding listeners to bot
-bot.add_listener(bot_events.on_ready)
-
-# adding commands to bot
-bot.add_command(bot_commands.join)
-bot.add_command(bot_commands.leave)
-bot.add_command(bot_commands.play)
-bot.add_command(bot_commands.pause)
-bot.add_command(bot_commands.resume)
-bot.add_command(bot_commands.stop)
-
-
-# running bot
-bot.run(token)
+asyncio.run(main())
