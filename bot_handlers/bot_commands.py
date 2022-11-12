@@ -41,5 +41,42 @@ async def play(ctx, url):
     with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
         info = ydl.extract_info(url, download=False)
         url2 = info['formats'][0]['url']
-        source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS, executable=r"E:\projects\python\scpbot\ffmpeg\bin\ffmpeg.exe")
+        source = await discord.FFmpegOpusAudio.from_probe(url2, method='fallback', **FFMPEG_OPTIONS)
         vc.play(source)
+        print("Playing")
+
+@bot.command()
+async def pause(ctx):
+    """Пауза"""
+    if ctx.voice_client is None:
+        await ctx.send("Бот не в голосовом канале")
+        return
+    if ctx.voice_client.is_playing():
+        ctx.voice_client.pause()
+    else:
+        await ctx.send("Бот не воспроизводит музыку")
+
+@bot.command()
+async def resume(ctx):
+    """Продолжить"""
+    if ctx.voice_client is None:
+        await ctx.send("Бот не в голосовом канале")
+        return
+    if ctx.voice_client.is_paused():
+        ctx.voice_client.resume()
+    else:
+        await ctx.send("Бот не на паузе")
+
+@bot.command()
+async def stop(ctx):
+    """Остановить"""
+    if ctx.voice_client is None:
+        await ctx.send("Бот не в голосовом канале")
+        return
+    if ctx.voice_client.is_playing():
+        ctx.voice_client.stop()
+    else:
+        await ctx.send("Бот не воспроизводит музыку")
+
+
+
