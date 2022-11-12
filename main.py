@@ -14,11 +14,22 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print('Bot is ready.')
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
+@bot.command()
+async def join(ctx):
+    """Подключение бота к голосовому каналу"""
+    if ctx.author.voice is None:
+        await ctx.send("Вы не в голосовом канале!")
         return
-    print(f"Получено сообщение: {message.content} {message}")
-    await message.reply(f"{message.content}")
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+@bot.command()
+async def leave(ctx):
+    """Отключение бота от голосового канала"""
+    if ctx.voice_client is not None:
+        await ctx.voice_client.disconnect()
+    else:
+        await ctx.send("Бот не в голосовом канале")
+
 
 bot.run(token)
