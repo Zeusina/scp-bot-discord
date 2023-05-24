@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/github/Zeusina/scp-bot-discord.svg)](https://wakatime.com/badge/github/Zeusina/scp-bot-discord)
 # Бот для discord сервера моего друга
 
 ## В планах полностью переписать кодовую базу для более удобной работы в дальнейшем
