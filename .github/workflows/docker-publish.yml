@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scpbot: latest-dev
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/${{ github.repository }}:latest-dev
           cache-from: type=gha
           cache-to: type=gha,mode=max
