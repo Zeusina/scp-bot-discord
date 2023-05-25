@@ -2,27 +2,22 @@ import discord
 from os import getenv
 import logging
 from scpbot.utils import logging_conf
+from discord.ext import commands
+from scpbot.music import musiccontroller
+
 
 logging_conf.configurate_logging()
 
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 
-@client.event
+@bot.event
 async def on_ready():
-    logging.info(f'We have logged in as {client.user}')
+    await bot.add_cog(musiccontroller.MusicController(bot))
+    logging.info(f'We have logged in as {bot.user}')
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-
-client.run(getenv("TOKEN"))
+bot.run(getenv("TOKEN"))
