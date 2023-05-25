@@ -30,7 +30,7 @@ class MusicController(commands.Cog):
             url2 = info.get("url")
             source = await discord.FFmpegOpusAudio.from_probe(url2, method='fallback', **FFMPEG_OPTIONS)
             vc.play(source)
-            logging.info("Playing" + info.get("title"))
+            logging.info("Playing " + info.get("title"))
 
     @commands.command()
     async def leave(self, ctx):
