@@ -24,9 +24,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          
+      - id: string
+        uses: ASzc/change-string-case-action@v5
+        with:
+          string: ${{ github.repository_owner }}
       - name: "Build & publish scpbot"
-        id: string
         uses: docker/build-push-action@v4
         with:
           push: true
