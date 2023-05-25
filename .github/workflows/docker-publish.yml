@@ -33,6 +33,6 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/${{ steps.string.outputs.lowercase }}/scpbotr:latest-dev
+            ghcr.io/${{ steps.string.outputs.lowercase }}/scpbot:latest-dev
           cache-from: type=gha
           cache-to: type=gha,mode=max
