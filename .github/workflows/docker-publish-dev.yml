@@ -1,4 +1,4 @@
-name: 'Docker publish'
+name: 'Docker publish - dev'
 on:
   release:
     types: [published]
@@ -24,7 +24,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: "convert username to lovercase"
+      - id: string
         uses: ASzc/change-string-case-action@v5
         with:
           string: ${{ github.repository_owner }}
@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/scpbotr:latest-dev
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev
           cache-from: type=gha
           cache-to: type=gha,mode=max
