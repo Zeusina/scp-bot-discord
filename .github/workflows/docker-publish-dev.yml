@@ -28,6 +28,8 @@ jobs:
     name: 'Build & Publish'
     runs-on: ubuntu-latest
     steps:
+      - env:
+          VERSION: ${{needs.versioning.outputs.version}}
       - name: "Checkout repository"
         uses: actions/checkout@v3
         
@@ -51,6 +53,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:${{needs.versioning.outputs.version}}
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:$VERSION
           cache-from: type=gha
           cache-to: type=gha,mode=max
