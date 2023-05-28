@@ -53,6 +53,6 @@ jobs:
           VERSION: ${{needs.versioning.outputs.version}}
         with:
           push: true
-          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:$VERSION
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:{{$VERSION}}
           cache-from: type=gha
           cache-to: type=gha,mode=max
