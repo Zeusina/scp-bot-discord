@@ -22,7 +22,7 @@ jobs:
           change_path: "src/scpbot"
           namespace: scpbot-main
           bump_each_commit: false
-          enable_prerelease_mode: true
+
           
   build:
     name: 'Build & Publish'
@@ -51,6 +51,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:${{needs.versioning.outputs.verion}}
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:latest-dev , ghcr.io/${{ steps.string.outputs.lowercase }}/scp-bot-discord:${{needs.versioning.outputs.version}}
           cache-from: type=gha
           cache-to: type=gha,mode=max
