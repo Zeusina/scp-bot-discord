@@ -49,7 +49,7 @@ class Music(commands.Cog):
         else:
             await ctx.voice_client.move_to(voice_channel)
 
-    @commands.command(name="pause", aliases=["p", "pa"], help="Приостановка воспроизведения")
+    @commands.command(name="pause", aliases=["pa"], help="Приостановка воспроизведения")
     async def pause(self, ctx):
         if ctx.voice_client is None:
             await ctx.send("Бот не в голосовом канале")
