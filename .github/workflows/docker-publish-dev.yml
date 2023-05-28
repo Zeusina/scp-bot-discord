@@ -26,7 +26,8 @@ jobs:
           change_path: "src/scpbot"
           namespace: scpbot-main
           bump_each_commit: false
-
+      - name: "Print version"
+        run: echo 'version - ${{ steps.version.outputs.version }}'
           
   build:
     name: 'Build & Publish'
